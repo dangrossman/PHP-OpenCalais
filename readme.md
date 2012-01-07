@@ -4,15 +4,21 @@ Open Calais Tags is a PHP class for extracting entities and tags from text using
 
 Calais is free for both personal and commercial use, and usage of this class requires a Calais API key. Getting an API key is an easy, automated process. Just click the "Request API Key" link at the top of their site.
 
-The Open Calais Tags class takes a content string as input, as well as a number of options, and returns a multidimensional array as output. The array.s keys are the entity types detected in the text, and the values are the entities found.
+## Usage ##
 
-Example input:
+Basic usage is simple. Create an instance of the class with your API key, and call the getEntities method using your content string.
+
+    require('opencalais.php');
+    $oc = new OpenCalais('your-api-key');
+    $entities = $oc->getEntities($content);
+
+### Example input ###
 
 > April 7 (Bloomberg) . Yahoo! Inc., the Internet company that snubbed a $44.6 billion takeover bid from Microsoft Corp., may drop in Nasdaq trading after the software maker threatened to cut its bid if directors fail to give in soon.
 > If Yahoo.s directors refuse to negotiate a deal within three weeks, Microsoft plans to nominate a board slate and take its case to investors, Chief Executive Officer Steve Ballmer said April 5 in a statement. He suggested the deal.s value might decline if Microsoft has to take those steps.
 > The ultimatum may send Yahoo Chief Executive Officer Jerry Yang scrambling to find an appealing alternative for investors to avoid succumbing to Microsoft, whose bid was a 62 percent premium to Yahoo.s stock price at the time. The deadline shows Microsoft is in a hurry to take on Google Inc., which dominates in Internet search, said analysts including Canaccord Adams.s Colin Gillis.
 
-Example output:
+### Example output ###
 
     Array
     (
@@ -52,11 +58,8 @@ Example output:
             )
     )
 
-Basic usage is simple. Create an instance of the class with your API key, and call the getEntities method using your content string.
 
-    require('calais.php');
-    $oc = new OpenCalais('your-api-key');
-    $entities = $oc->getEntities($content);
+## Optional Settings ##
 
 A number of settings exist which can be changed through public properties of the OpenCalais object:
 
