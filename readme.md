@@ -22,7 +22,7 @@ Basic usage is simple. Create an instance of the class with your API key, and ca
 
     Array
     (
-        [Industry Term] => Array
+        [IndustryTerm] => Array
             (
                 [0] => Internet
                 [1] => software maker
