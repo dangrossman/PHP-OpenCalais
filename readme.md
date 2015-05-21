@@ -1,3 +1,7 @@
+# DO NOT USE THIS LIBRARY #
+
+This library was designed for use with the legacy Open Calais API, which shut down on August 31, 2015. It is no longer developed and will not be ported to the new API.
+
 # Open Calais Tags #
 
 Open Calais Tags is a PHP class for extracting entities and tags from text using [Open Calais](http://www.opencalais.com). Calais performs semantic analysis of the text, using natural language processing to identify concepts like people, companies and technologies discussed in the text. These are especially useful for suggesting tags for your content such as website articles or blog posts. You could even automatically tag archived content that would take days to go through manually.
