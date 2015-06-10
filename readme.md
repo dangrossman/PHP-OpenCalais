@@ -1,7 +1,3 @@
-# DO NOT USE THIS LIBRARY #
-
-This library was designed for use with the legacy Open Calais API, which shut down on August 31, 2015. It is no longer developed and will not be ported to the new API.
-
 # Open Calais Tags #
 
 Open Calais Tags is a PHP class for extracting entities and tags from text using [Open Calais](http://www.opencalais.com). Calais performs semantic analysis of the text, using natural language processing to identify concepts like people, companies and technologies discussed in the text. These are especially useful for suggesting tags for your content such as website articles or blog posts. You could even automatically tag archived content that would take days to go through manually.
@@ -65,14 +61,6 @@ Basic usage is simple. Create an instance of the class with your API key, and ca
 
 ## Optional Settings ##
 
-A number of settings exist which can be changed through public properties of the OpenCalais object:
+A number of settings exist which can be changed through public properties of the OpenCalais object: `contentType` (default: text/html), `outputFormat` (default: application/json). Refer to the OpenCalais documentation for more information.
 
-* **contentType**: text/html (default), text/xml, text/htmlraw, text/raw. Indicates the input document.s content type.
-* **getGenericRelations**: true or false. Indicates whether to extract and return entities from the document.
-* **getSocialTags**: true or false. Indicates whether to return suggested social tags for the document.
-* **allowDistribution**: true or false. Indicates whether the extracted metadata can be distributed by Calais. Defaults to false.
-* **allowSearch**: true or false. Indicates whether future searches can be performed on metadata through the Calais API. Defaults to false.
-* **externalID**: Allows you to set an ID for the content to pass on to Calais when it.s submitted for analysis. Defaults to empty string.
-* **submitter**: Allows you to set an identifier for the content submitter. Defaults to .Open Calais Tags..
-
-This class is distributed under an open source BSD license.
+This code is distributed under the MIT license. See http://www.opensource.org/licenses/mit-license.php
