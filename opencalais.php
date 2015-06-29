@@ -12,6 +12,9 @@
 
 class OpenCalaisException extends Exception {}
 
+/**
+ * Class OpenCalais. Working with OpenCalais API
+ */
 class OpenCalais {
 
     public $outputFormat = 'application/json';
@@ -19,16 +22,25 @@ class OpenCalais {
 
     private $api_url = 'https://api.thomsonreuters.com/permid/calais';
     private $api_token = '';
-    private $document = '';
     private $entities = array();
 
-    public function OpenCalais($api_token) {
+    /**
+     * @param string $api_token
+     * @throws OpenCalaisException
+     */
+    public function __construct($api_token) {
         if (empty($api_token)) {
             throw new OpenCalaisException('An OpenCalais API token is required to use this class.');
         }
         $this->api_token = $api_token;
     }
 
+    /**
+     * Return entities by document
+     * @param string $document
+     * @return array
+     * @throws OpenCalaisException
+     */
     public function getEntities($document) {
 
         $ch = curl_init();
@@ -53,6 +65,8 @@ class OpenCalais {
         $object = json_decode($response);
         if (empty($object)) {
             throw new OpenCalaisException('No response was received from the API.');
+        } elseif (isset($object->fault)) {
+            throw new OpenCalaisException('OpenCalais Error:' . $object->fault->faultstring);
         }
 
         foreach ($object as $item) {
@@ -62,7 +76,5 @@ class OpenCalais {
         }
 
         return $this->entities;
-
     }
-
 }
