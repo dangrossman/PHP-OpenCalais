@@ -45,7 +45,7 @@ class OpenCalais {
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->api_url);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, 
+        curl_setopt($ch, CURLOPT_HTTPHEADER,
             array(
                 'X-AG-Access-Token: ' . $this->api_token,
                 'Content-Type: ' . $this->contentType,
@@ -59,8 +59,21 @@ class OpenCalais {
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $document);
 
-        $response = curl_exec($ch);        
-        $response = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $response);
+        $response = curl_exec($ch);
+        // Remove non-utf8 characters from string, see http://stackoverflow.com/a/1401716
+        $regex = <<<'END'
+        /
+          (
+            (?: [\x00-\x7F]                 # single-byte sequences   0xxxxxxx
+            |   [\xC0-\xDF][\x80-\xBF]      # double-byte sequences   110xxxxx 10xxxxxx
+            |   [\xE0-\xEF][\x80-\xBF]{2}   # triple-byte sequences   1110xxxx 10xxxxxx * 2
+            |   [\xF0-\xF7][\x80-\xBF]{3}   # quadruple-byte sequence 11110xxx 10xxxxxx * 3
+            ){1,100}                        # ...one or more times
+          )
+        | .                                 # anything else
+        /x
+END;
+        $response = preg_replace($regex, '$1', $response);
 
         $object = json_decode($response);
         if (empty($object)) {
